@@ -8,7 +8,11 @@ Module.register("MMM-MoviePosters", {
       updateInterval: 60000,
       //fade speed
       fadeSpeed: 4000,
+      debug: true
     },
+
+    movieIndex: 0,
+    movieInfo: {},
 
     getScripts: function () {
         return ["tmdb.js"];
@@ -20,9 +24,8 @@ Module.register("MMM-MoviePosters", {
 
     // Define start sequence.
     start: function () {
-        Log.info("Starting module: " + this.name);
-        const movieInfo = tmdb.getMovieInfo()
-        this.movieIndex = 0
+        Log.info("Starting Movie Poster module: " + this.name);
+        this.movieInfo = tmdb.getMovieInfo();
         
         // Schedule update timer.
         setInterval(() => {
@@ -32,12 +35,20 @@ Module.register("MMM-MoviePosters", {
   
     // Override dom generator.
     getDom: function () {
-      var wrapper = document.createElement("img");
-      const curMovieDetails = tmdb.getMovieDetails(this.movieInfo, this.movieIndex)
-      wrapper.src = tmdb.getImageForMovie(curMovieDetails.poster_path);
-      this.movieIndex++
-      if (movieIndex > this.movieInfo.results.length) {
-        this.movieIndex = 0
+      var wrapper = document.createElement("div");
+      
+      const curMovieDetails = tmdb.getMovieDetails(this.movieInfo, this.movieIndex);
+      var imageElement = document.createElement("img");
+
+      imageElement.src = tmdb.getImageForMovie(curMovieDetails.poster_path);
+      imageElement.style.maxWidth = '50%';
+      imageElement.style.maxHeight = '50%';
+
+      wrapper.appendChild(imageElement);
+      
+      this.movieIndex++;
+      if (this.movieIndex > this.movieInfo.results.length) {
+        this.movieIndex = 0;
       }
       return wrapper;
     },
