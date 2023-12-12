@@ -35,7 +35,9 @@ Module.register("MMM-MoviePosters", {
   
     // Override dom generator.
     getDom: function () {
+      Log.info("Log in the getDom function");
       var wrapper = document.createElement("div");
+      wrapper.innerHTML = "Inner HTML"
       
       const curMovieDetails = tmdb.getMovieDetails(this.movieInfo, this.movieIndex);
       var imageElement = document.createElement("img");

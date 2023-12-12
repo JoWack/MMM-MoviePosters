@@ -10,24 +10,25 @@ async function getMovieInfo () {
         }
     };
 
-    const res = await fetch(url, options)
+    const res = await fetch(url, options);
 
     if (!res.ok) {
-        throw new Error('failed to fetch movie info')
+        Log.error("COULD NOT RECEIVE MOVIE INFO");
+        throw new Error('failed to fetch movie info');
     }
 
-    return await res.json()
+    return await res.json();
         // .then(res => res.json())
         // .then(json => console.log(json))
         // .catch(err => console.error('error:' + err));
 }
 
 async function getMovieDetails (movieInfoJson, index) {
-    return movieInfoJson.results[index]
+    return movieInfoJson.results[index];
 }
 
 async function getImageForMovie(posterPath) {
     // example path: /dB6Krk806zeqd0YNp2ngQ9zXteH.jpg
     // example id: 897087 
-    return "https://image.tmdb.org/t/p/original" + posterPath
+    return "https://image.tmdb.org/t/p/original" + posterPath;
 }
