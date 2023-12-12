@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-Module.register("mmm-movieposters", {
+Module.register("MMM-MoviePosters", {
     
     // Default module config.
     defaults: {
