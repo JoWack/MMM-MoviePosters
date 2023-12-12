@@ -1,0 +1,11 @@
+{
+  "name": "mmm-movieposters",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "joe wacker",
+  "license": "ISC"
+}
