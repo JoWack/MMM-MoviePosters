@@ -31,10 +31,10 @@ Module.register("MMM-MoviePosters", {
     },
   
     // Override dom generator.
-    getDom: async function () {
+    getDom: function () {
       var wrapper = document.createElement("img");
       const curMovieDetails = tmdb.getMovieDetails(this.movieInfo, this.movieIndex)
-      wrapper.src = await tmdb.getImageForMovie(curMovieDetails.poster_path);
+      wrapper.src = tmdb.getImageForMovie(curMovieDetails.poster_path);
       this.movieIndex++
       if (movieIndex > this.movieInfo.results.length) {
         this.movieIndex = 0
