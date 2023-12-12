@@ -2,7 +2,6 @@
   "name": "MMM-MoviePosters",
   "version": "1.0.0",
   "description": "",
-  "main": "MMM-MoviePosters.js",
   "scripts": {
     "test": "test"
   },
