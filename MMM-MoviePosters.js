@@ -73,17 +73,17 @@ Module.register("MMM-MoviePosters", {
   
     // Override dom generator.
     getDom: function () {
-      Log.info("Log in the getDom function");
-      var wrapper = document.createElement("div");
-      wrapper.innerHTML = "Inner HTML"
       
       // const curMovieDetails = this.getMovieDetails(this.movieInfo, this.movieIndex);
-      var curMovieDetails;
+      // var curMovieDetails;
 
       this.getMovieDetails(this.movieInfo, this.movieIndex)
         .then(curMovieDetails => {
             // curMovieDetails = res;
             Log.info(`CUR MOVIE DETAILS: ${JSON.stringify(res)}`);
+            // Log.info("Log in the getDom function");
+            var wrapper = document.createElement("div");
+            wrapper.innerHTML = "Inner HTML"
 
             var imageElement = document.createElement("img");
 
