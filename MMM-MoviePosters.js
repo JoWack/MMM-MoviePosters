@@ -81,23 +81,26 @@ Module.register("MMM-MoviePosters", {
       var curMovieDetails;
 
       this.getMovieDetails(this.movieInfo, this.movieIndex)
-        .then(res => {
-            curMovieDetails = res;
+        .then(curMovieDetails => {
+            // curMovieDetails = res;
             Log.info(`CUR MOVIE DETAILS: ${JSON.stringify(res)}`);
-        });
 
-      var imageElement = document.createElement("img");
+            var imageElement = document.createElement("img");
 
-      imageElement.src = this.getImageForMovie(curMovieDetails.poster_path);
-      imageElement.style.maxWidth = '50%';
-      imageElement.style.maxHeight = '50%';
+            imageElement.src = this.getImageForMovie(curMovieDetails.poster_path);
+            imageElement.style.maxWidth = '50%';
+            imageElement.style.maxHeight = '50%';
 
-      wrapper.appendChild(imageElement);
+            wrapper.appendChild(imageElement);
+            
+            this.movieIndex++;
+            if (this.movieIndex > this.movieInfo.results.length) {
+                this.movieIndex = 0;
+            }
+        })
+        .then(() => {return wrapper});
+
       
-      this.movieIndex++;
-      if (this.movieIndex > this.movieInfo.results.length) {
-        this.movieIndex = 0;
-      }
-      return wrapper;
+      // return wrapper;
     },
   });
