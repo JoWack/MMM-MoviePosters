@@ -46,7 +46,7 @@ Module.register("MMM-MoviePosters", {
     },
     
     getMovieDetails: async function (movieInfoJson, index) {
-        return movieInfoJson.results[index];
+        return await movieInfoJson.results[index];
     },
     
     getImageForMovie: async function (posterPath) {
@@ -58,7 +58,12 @@ Module.register("MMM-MoviePosters", {
     // Define start sequence.
     start: function () {
         Log.info("Starting Movie Poster module: " + this.name);
-        this.movieInfo = this.getMovieInfo();
+        // this.movieInfo = this.getMovieInfo();
+        this.getMovieInfo()
+            .then(res => {
+                this.movieInfo = res;
+                Log.info("MOVIE INFO: " + JSON.stringify(this.movieInfo));
+            });
         
         // Schedule update timer.
         setInterval(() => {
@@ -72,7 +77,15 @@ Module.register("MMM-MoviePosters", {
       var wrapper = document.createElement("div");
       wrapper.innerHTML = "Inner HTML"
       
-      const curMovieDetails = this.getMovieDetails(this.movieInfo, this.movieIndex);
+      // const curMovieDetails = this.getMovieDetails(this.movieInfo, this.movieIndex);
+      var curMovieDetails;
+
+      this.getMovieDetails(this.movieInfo, this.movieIndex)
+        .then(res => {
+            curMovieDetails = res;
+            Log.info(`CUR MOVIE DETAILS: ${JSON.stringify(res)}`);
+        });
+
       var imageElement = document.createElement("img");
 
       imageElement.src = this.getImageForMovie(curMovieDetails.poster_path);
